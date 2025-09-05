@@ -586,3 +586,63 @@ class QualityReporting:
                 f.write(report_content)
         
         return report_content
+
+#######################################################################################################################
+# FUNCTION-BASED WRAPPERS FOR NOTEBOOK COMPATIBILITY
+#######################################################################################################################
+
+def assess_table_quality(df, table_name):
+    """Function wrapper for DataQualityAssessment.assess_table_quality"""
+    return DataQualityAssessment.assess_table_quality(df, table_name)
+
+def identify_placeholder_patterns(df):
+    """Function wrapper for DataQualityAssessment.identify_placeholder_patterns"""
+    return DataQualityAssessment.identify_placeholder_patterns(df)
+
+def analyze_duplicates(df, table_name, key_columns=None):
+    """Function wrapper for DuplicateHandler.analyze_duplicates"""
+    return DuplicateHandler.analyze_duplicates(df, table_name, key_columns)
+
+def remove_duplicates(df, strategy='complete', subset_columns=None):
+    """Function wrapper for DuplicateHandler.remove_duplicates"""
+    return DuplicateHandler.remove_duplicates(df, strategy, subset_columns)
+
+def analyze_missing_patterns(df, table_name):
+    """Function wrapper for MissingDataAnalyzer.analyze_missing_patterns"""
+    return MissingDataAnalyzer.analyze_missing_patterns(df, table_name)
+
+def visualize_missing_patterns(df, table_name):
+    """Function wrapper for MissingDataAnalyzer.visualize_missing_patterns"""
+    return MissingDataAnalyzer.visualize_missing_patterns(df, table_name)
+
+def numerical_imputation(series, strategy='median', group_by=None, group_data=None):
+    """Function wrapper for ImputationStrategies.numerical_imputation"""
+    return ImputationStrategies.numerical_imputation(series, strategy, group_by, group_data)
+
+def categorical_imputation(series, strategy='mode', custom_value=None):
+    """Function wrapper for ImputationStrategies.categorical_imputation"""
+    return ImputationStrategies.categorical_imputation(series, strategy, custom_value)
+
+def iqr_outlier_detection(series, multiplier=1.5):
+    """Function wrapper for OutlierDetection.iqr_method"""
+    return OutlierDetection.iqr_method(series, multiplier)
+
+def zscore_outlier_detection(series, threshold=3):
+    """Function wrapper for OutlierDetection.zscore_method"""
+    return OutlierDetection.zscore_method(series, threshold)
+
+def modified_zscore_outlier_detection(series, threshold=3.5):
+    """Function wrapper for OutlierDetection.modified_zscore_method"""
+    return OutlierDetection.modified_zscore_method(series, threshold)
+
+def visualize_outliers(df, column, methods_results):
+    """Function wrapper for OutlierDetection.visualize_outliers"""
+    return OutlierDetection.visualize_outliers(df, column, methods_results)
+
+def standardize_column_names(df):
+    """Function wrapper for DataTransformation.standardize_column_names"""
+    return DataTransformation.standardize_column_names(df)
+
+def convert_data_types(df, type_mappings):
+    """Function wrapper for DataTransformation.convert_data_types"""
+    return DataTransformation.convert_data_types(df, type_mappings)
