@@ -12,17 +12,15 @@ This project analyzes CRM sales opportunities data to uncover patterns, relation
 │
 ├── data/                           # Data directory
 │   ├── raw/                        # Original unprocessed data files
+│   ├── interim/                    # Intermediate preprocessed data
 │   └── processed/                  # Cleaned and integrated datasets
 │       └── crm_master_dataset.csv  # Final integrated dataset for analysis
 │
 ├── notebooks/                      # Jupyter notebooks for analysis
-│   ├── 00_data_exploration.ipynb  # Initial data exploration
-│   ├── 01_data_preprocessing.ipynb # Data cleaning and preprocessing
-│   ├── 02_data_integration.ipynb  # Multi-table integration
-│   └── 03_data_eda.ipynb         # Exploratory data analysis
+│   └── assignment_2.ipynb          # Complete analysis pipeline (all 4 parts combined)
 │
 ├── src/                           # Source code for helper functions (utilities)
-│
+│   └── preprocessing_utils.py     # Data preprocessing utility functions
 │
 ├── requirements.txt               # Python dependencies
 └── README.md                     # Project documentation (this file)
@@ -34,11 +32,16 @@ This project analyzes CRM sales opportunities data to uncover patterns, relation
 
 #### `data/raw/`
 - **Original CRM data files**: Contains the raw data exports from the CRM system including:
-  - Opportunities data
-  - Account information
-  - Sales agent details
-  - Product information
-  - Regional office data
+  - `accounts.csv` - Company information
+  - `products.csv` - Product catalog
+  - `sales_pipeline.csv` - Sales opportunities
+  - `sales_teams.csv` - Sales agent and manager data
+  - `data_dictionary.csv` - Field definitions
+
+#### `data/interim/`
+- **Preprocessed tables**: Created automatically by Part 2 of the notebook
+- Contains cleaned versions of each raw table with suffix `_preprocessed.csv`
+- Includes quality improvements: missing data imputed, outliers handled, types standardized
 
 #### `data/processed/crm_master_dataset.csv`
 - **Integrated master dataset**: Combined and cleaned dataset with 8,800 rows × 18 columns
@@ -64,55 +67,47 @@ This project analyzes CRM sales opportunities data to uncover patterns, relation
 
 ### Notebooks
 
-#### `00_data_exploration.ipynb`
-- **Purpose**: Initial exploration and understanding of the raw data
-- **Contents**:
-  - Loading and examining multiple data tables
-  - Understanding data types and structures
-  - Identifying relationships between tables
-  - Initial data quality assessment
-  - Preliminary statistics and observations
+#### `assignment_2.ipynb` - Complete Analysis Pipeline
+A comprehensive Jupyter notebook containing the entire data science workflow from raw data to insights. The notebook is structured in 4 sequential parts:
 
-#### `01_data_preprocessing.ipynb`
-- **Purpose**: Data cleaning and preparation
-- **Contents**:
-  - Handling missing values
-  - Data type conversions
-  - Outlier detection and treatment
-  - Standardizing formats (dates, currencies, etc.)
-  - Creating derived features
-  - Data validation and quality checks
+**Part 1: Data Exploration**
+- Loading and examining 5-table CRM database
+- Understanding data types and structures
+- Business context and table relationships
+- Initial data quality assessment
+- Preliminary statistics and observations
 
-#### `02_data_integration.ipynb`
-- **Purpose**: Combining multiple data sources into a single dataset
-- **Contents**:
-  - Defining join keys and relationships
-  - Merging opportunities with account data
-  - Integrating sales agent and manager information
-  - Adding product and pricing details
-  - Incorporating regional office data
-  - Final validation of integrated dataset
-  - Exporting master dataset to CSV
+**Part 2: Data Preprocessing**
+- Systematic data loading and quality assessment
+- Duplicate detection and handling
+- Missing data pattern analysis with visualizations
+- Intelligent imputation strategies (business logic-based)
+- Multi-method outlier detection (IQR, Z-score, Modified Z-score)
+- Data transformation and standardization
+- Quality improvement metrics and reporting
+- Saves preprocessed tables to `data/interim/`
 
-#### `03_data_eda.ipynb`
-- **Purpose**: Comprehensive exploratory data analysis
-- **Contents**:
-  1. **Data Loading & Setup**: Import libraries and load integrated dataset
-  2. **Basic Exploration**: Dataset shape, data types, descriptive statistics
-  3. **Correlation Analysis**: Relationships between numerical features
-  4. **Deal Stage Distribution**: Analysis of won/lost/engaging deals
-  5. **Pair Plots**: Multi-dimensional relationships visualization
-  6. **Temporal Analysis**: Sales trends over time
-  7. **Sector Performance**: Deal values and counts by industry
-  8. **Deal Value Distributions**: KDE plots and histograms
-  9. **Sales Agent Performance**: Individual and team performance metrics
-  10. **Regional Analysis**: Geographic performance patterns
-  11. **Product Analysis**: Performance by product series
-  12. **Sales Cycle Analysis**: Time from engagement to close
-  13. **Company Size Analysis**: Impact of customer characteristics
-  14. **Win Rate Analysis**: Success rates across dimensions
-  15. **Correlation Heatmap**: Comprehensive correlation matrix
-  16. **Key Insights Summary**: Business recommendations
+**Part 3: Data Integration**
+- Loading preprocessed tables from interim directory
+- Foreign key relationship validation
+- Master dataset creation via left joins
+- Integration quality assessment
+- Business logic validation (e.g., Won deals have values)
+- Saves master dataset to `data/processed/crm_master_dataset.csv`
+
+**Part 4: Exploratory Data Analysis**
+- Load master dataset (8,800 rows × 18 columns)
+- Descriptive statistics and correlation analysis
+- Deal stage distribution analysis
+- Pair plots for multi-dimensional relationships
+- Temporal performance trends over time
+- Sector and regional performance analysis
+- Sales agent performance comparison
+- Product series effectiveness analysis
+- Sales cycle time analysis
+- Company size impact on deals
+- Win rate analysis across dimensions
+- Key business insights and research questions
 
 ## Key Findings
 
@@ -150,9 +145,9 @@ This project analyzes CRM sales opportunities data to uncover patterns, relation
 ## Getting Started
 1. Clone this repository
 2. Install dependencies: `pip install -r requirements.txt`
-3. Open Jupyter Notebook: `jupyter notebook`
-4. Start with `00_data_exploration.ipynb` to understand the data
-5. Follow through notebooks in sequence for complete analysis
+3. Navigate to notebooks directory: `cd notebooks`
+4. Launch Jupyter: `jupyter notebook`
+5. Open `assignment_2.ipynb`
+6. Run all cells sequentially to execute the complete analysis pipeline
 
-## Last Updated
-September 2025 
+**Note**: The notebook will automatically create `data/interim/` and `data/processed/` directories during execution.

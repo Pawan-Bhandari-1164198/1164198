@@ -205,3 +205,9 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Assignment - Original component notebooks (combined into assignment_2.ipynb)
+notebooks/00_data_exploration.ipynb
+notebooks/01_data_preprocessing.ipynb
+notebooks/02_data_integration.ipynb
+notebooks/03_data_eda.ipynb
