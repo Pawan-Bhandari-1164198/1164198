@@ -9,3 +9,6 @@ ydata-profiling
 tabulate>=0.9.0
 rich>=13.7.0
 missingno
+imblearn
+shap
+lime
